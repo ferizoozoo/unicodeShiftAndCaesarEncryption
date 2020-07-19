@@ -25,15 +25,29 @@ public class Main {
     }
     
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String command = scanner.nextLine();
-        String message = scanner.nextLine();
-        int key = scanner.nextInt();
+        String mode = "";
+        String data = "";
+        int key = 0;
+        int counter = 0;
+        while (counter < args.length) {
+            switch (args[counter]) {
+                case "-key":
+                    key = Integer.parseInt(args[++counter]);
+                    break;
+                case "-data":
+                    data += args[++counter];
+                    break;
+                case "-mode":
+                    mode += args[++counter];
+                    break;            
+            }
+            counter++;
+        }
         String output = "";
-        if (command.equals("enc")) {
-            output += encrypt(message, key);
-        } else if (command.equals("dec")) {
-            output += decrypt(message, key);
+        if (mode.equals("enc")) {
+            output += encrypt(data, key);
+        } else if (mode.equals("dec")) {
+            output += decrypt(data, key);
         }
         System.out.println(output);
     }
